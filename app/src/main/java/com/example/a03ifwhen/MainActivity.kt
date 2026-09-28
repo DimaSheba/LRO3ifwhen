@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.material3.Button
 import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +25,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ЛР03ifwhenTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
 
-                    Column {
+                    Column(
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .padding(top = 50.dp)
+                    ) {
 
                         var number by remember {
                             mutableStateOf("")
@@ -42,9 +49,17 @@ class MainActivity : ComponentActivity() {
                                 number = it
                             },
                             label = {
-                                Text("Введите номер")
+                                Text("Введите номер от 1 до 4")
+                            }
+                        )
+
+                        OutlinedTextField(
+                            value = output,
+                            onValueChange = {},
+                            label = {
+                                Text("Результат")
                             },
-                            modifier = Modifier.padding(innerPadding)
+                            readOnly = true
                         )
 
                         Button(
@@ -62,17 +77,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             Text("Определить")
                         }
-
-                        OutlinedTextField(
-                            value = output,
-                            onValueChange = {},
-                            label = {
-                                Text("Результат")
-                            },
-                            readOnly = true
-                        )
                     }
-
                 }
             }
         }
