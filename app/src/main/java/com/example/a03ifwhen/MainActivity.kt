@@ -11,6 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import com.example.a03ifwhen.ui.theme.ЛР03ifwhenTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.Column
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,15 +26,31 @@ class MainActivity : ComponentActivity() {
             ЛР03ifwhenTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                    OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
-                        label = {
-                            Text("Введите номер")
-                        },
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Column {
 
+                        var number by remember {
+                            mutableStateOf("")
+                        }
+
+                        OutlinedTextField(
+                            value = number,
+                            onValueChange = {
+                                number = it
+                            },
+                            label = {
+                                Text("Введите номер")
+                            },
+                            modifier = Modifier.padding(innerPadding)
+                        )
+
+                        Button(
+                            onClick = {
+
+                            }
+                        ) {
+                            Text("Определить")
+                        }
+                    }
 
                 }
             }
