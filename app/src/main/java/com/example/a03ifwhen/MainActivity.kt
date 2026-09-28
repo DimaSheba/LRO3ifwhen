@@ -32,6 +32,10 @@ class MainActivity : ComponentActivity() {
                             mutableStateOf("")
                         }
 
+                        var output by remember {
+                            mutableStateOf("")
+                        }
+
                         OutlinedTextField(
                             value = number,
                             onValueChange = {
@@ -45,11 +49,28 @@ class MainActivity : ComponentActivity() {
 
                         Button(
                             onClick = {
+                                val seasonNumber = number.toIntOrNull()
 
+                                output = when (seasonNumber) {
+                                    1 -> "Зима"
+                                    2 -> "Весна"
+                                    3 -> "Лето"
+                                    4 -> "Осень"
+                                    else -> "Ошибка"
+                                }
                             }
                         ) {
                             Text("Определить")
                         }
+
+                        OutlinedTextField(
+                            value = output,
+                            onValueChange = {},
+                            label = {
+                                Text("Результат")
+                            },
+                            readOnly = true
+                        )
                     }
 
                 }
